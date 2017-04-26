@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using InControl;
+using UnityStandardAssets.Characters.ThirdPerson;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
-{
-    [RequireComponent(typeof (ThirdPersonCharacter))]
-    public class ThirdPersonUserControl : MonoBehaviour
+public class ThirdPersonUserControl : MonoBehaviour
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
@@ -13,8 +12,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         public int playerNumber = 1;
-        
-        private void Start()
+        InputManager inputDevice ;
+
+
+
+    private void Start()
         {
             // get the transform of the main camera
             if (Camera.main != null)
@@ -48,9 +50,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            // read inputs
-            float h = CrossPlatformInputManager.GetAxis(currentPlayerNumberHorizontal);
-            float v = CrossPlatformInputManager.GetAxis(currentPlayerNumberVertical);
+        var inputDevice = InputManager.ActiveDevice;
+        // read inputs
+        float h = inputDevice.LeftStickX;
+            float v = inputDevice.LeftStickY;
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character
@@ -75,4 +78,4 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Jump = false;
         }
     }
-}
+
