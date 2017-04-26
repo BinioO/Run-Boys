@@ -52,7 +52,7 @@ public class ThirdPersonUserControl : MonoBehaviour
         {
         var inputDevice = InputManager.ActiveDevice;
         // read inputs
-        float h = inputDevice.LeftStickX;
+            float h = inputDevice.LeftStickX;
             float v = inputDevice.LeftStickY;
             bool crouch = Input.GetKey(KeyCode.C);
 
